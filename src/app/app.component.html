@@ -1,26 +1,32 @@
 <div class = "container">
 <h1>{{title}}</h1>
 <h2>Add Employee:</h2>
-
 <form class="form-horizontal">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" 
-	name="name" [(ngModel)]="model.name"  placeholder="Enter Your Name">
+        <input type="text" class="form-control" id="name" name="name"
+[(ngModel)]="model.name" placeholder="Enter Your Name">
 	     
 </div>
 </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="position">Position:</label>
+
       <div class="col-sm-10">          
         <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model.position" placeholder="Enter your position">
-      </div>
+
+
+</div>
 </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="salary">Salary:</label>
+
+
       <div class="col-sm-10">
         <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model.salary" placeholder="Enter Salary">
+
+
       </div>
 	</div>
     <div class="form-group">        
@@ -37,8 +43,8 @@
       <tr>
         <th width=400>Name</th>
         <th width=400>Position</th>
-        <th width=400>Salary</th>
-	<th width=200>Actions</th>
+        <th width=200>Salary</th>
+	<th width=400>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -47,9 +53,43 @@
         <td>{{employee.position}}</td>
         <td>{{employee.salary}}</td>
 	<td>
+	<a class="btn btn-success" (click)="editEmployee(i)">Edit</a>
 	    <a class="btn btn-danger" (click)="deleteEmployee(i)">Delete</a>
       	</td>
 	</tr>
       	</tbody>
 	</table>
+
+
+<h2>Update Employee:</h2>
+
+<form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" 
+	name="name" [(ngModel)]="model2.name"  placeholder="Enter Your Name">
+	     
+</div>
+</div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="position">Position:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model2.position" placeholder="Enter your position">
+      </div>
+</div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="salary">Salary:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model2.salary" placeholder="Enter Salary">
+      </div>
+	</div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" (click)="updateEmployee()">update Employee</button>
+      </div>
+    </div>
+  </form>
+
+
 </div>
