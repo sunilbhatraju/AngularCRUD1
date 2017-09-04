@@ -24,11 +24,10 @@ export class AppComponent implements OnInit{
   myValue;
   ngOnInit(){
     this.model = new FormGroup({
-      'name': new FormControl(this.model.name, [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      'position': new FormControl(this.model.position),
+      'name': new FormControl(this.model.name,
+        [Validators.required, Validators.minLength(4),]),
+      'position': new FormControl(this.model.position,
+        [Validators.required, Validators.minLength(4),]),
       'salary': new FormControl(this.model.salary, Validators.required)
     });
   }
@@ -60,10 +59,8 @@ export class AppComponent implements OnInit{
     this.edit = true;
     this.Show=false;
     this.add=false;
-    if(name!="")
-    {
+
       this.model2.name = this.employees[k].name;
-    }
     this.model2.position = this.employees[k].position;
     this.model2.salary = this.employees[k].salary;
     this.myValue = k;
@@ -81,4 +78,3 @@ export class AppComponent implements OnInit{
     }
   }
 }
-
