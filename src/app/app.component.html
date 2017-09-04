@@ -1,43 +1,81 @@
+<h4>{{title}}</h4>
+  <div class="col-sm-10">
+    <button type="button" class="btn btn-default" (click)="createEmp()">Create Employee</button>
+  </div>
+<div style="margin-top: 60px;">
+
 <div class = "container">
-<h1>{{title}}</h1>
+  <div *ngIf="add">
 <h2>Add Employee:</h2>
-<form class="form-horizontal">
+<form class="form-horizontal" #empForm="ngForm">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" name="name"
-[(ngModel)]="model.name" placeholder="Enter Your Name">
-	     
+        <input type="text"  class="form-control" name="name"  minlength="4"  [(ngModel)]="model.name" placeholder="Enter Your Name" #name="ngModel" required/>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+        </div>
 </div>
 </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="position">Position:</label>
 
-      <div class="col-sm-10">          
-        <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model.position" placeholder="Enter your position">
-
-
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="position" [(ngModel)]="model.position" placeholder="Enter your position" required />
 </div>
 </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="salary">Salary:</label>
-
-
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model.salary" placeholder="Enter Salary">
-
-
+        <input type="text" class="form-control" name="salary" [(ngModel)]="model.salary" placeholder="Enter Salary" required />
       </div>
 	</div>
-    <div class="form-group">        
+    <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" (click)="addEmployee()">Add Employee</button>
+        <button type="submit" class="btn btn-default" (click)="addEmployee()" [disabled]="empForm.invalid">Add Employee</button>
       </div>
     </div>
   </form>
+</div>
+<div *ngIf="edit">
 
+  <h2>Update Employee:</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name"
+               name="name" [(ngModel)]="model2.name"  placeholder="Enter Your Name" #name="ngModel" required/>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="position">Position:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model2.position" placeholder="Enter your position" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="salary">Salary:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model2.salary" placeholder="Enter Salary" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" (click)="updateEmployee()">update Employee</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="Show">
 <h2>Employee Details</h2>
-
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -60,36 +98,6 @@
       	</tbody>
 	</table>
 
-
-<h2>Update Employee:</h2>
-
-<form class="form-horizontal">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="name">Name:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" 
-	name="name" [(ngModel)]="model2.name"  placeholder="Enter Your Name">
-	     
 </div>
 </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="position">Position:</label>
-      <div class="col-sm-10">          
-        <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model2.position" placeholder="Enter your position">
-      </div>
-</div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="salary">Salary:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model2.salary" placeholder="Enter Salary">
-      </div>
-	</div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" (click)="updateEmployee()">update Employee</button>
-      </div>
-    </div>
-  </form>
-
-
 </div>
