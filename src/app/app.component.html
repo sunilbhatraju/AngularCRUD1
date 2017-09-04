@@ -1,3 +1,4 @@
+
 <h4>{{title}}</h4>
   <div class="col-sm-10">
     <button type="button" class="btn btn-default" (click)="createEmp()">Create Employee</button>
@@ -11,10 +12,14 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <input type="text"  class="form-control" name="name"  minlength="4"  [(ngModel)]="model.name" placeholder="Enter Your Name" #name="ngModel" required/>
+        <input type="text"  class="form-control" name="name"  minlength="4" maxlength="10"  pattern="^[A-Za-z0-9]*[A-Za-z0-9][A-Za-z0-9]\S*$" [(ngModel)]="model.name" placeholder="Enter Your Name"
+               #name="ngModel" required/>
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
           <div *ngIf="name.errors.required">
             Name is required.
+          </div>
+          <div *ngIf="name.errors.pattern">
+            No Spaces
           </div>
           <div *ngIf="name.errors.minlength">
             Name must be at least 4 characters long.
@@ -26,15 +31,42 @@
       <label class="control-label col-sm-2" for="position">Position:</label>
 
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="position" [(ngModel)]="model.position" placeholder="Enter your position" required />
-</div>
+        <input type="text" class="form-control" name="position" minlength="4" maxlength="10" pattern="^[a-z]*$" [(ngModel)]="model.position" placeholder="Enter your position"
+               #position="ngModel" required />
+        <div *ngIf="position.invalid && (position.dirty || position.touched)" class="alert alert-danger">
+          <div *ngIf="position.errors.required">
+            Position is required.
+          </div>
+          <div *ngIf="position.errors.pattern">
+          Only Alphabets are must be entered
+          </div>
+          <div *ngIf="position.errors.minlength">
+            Position must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
 </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="salary">Salary:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="salary" [(ngModel)]="model.salary" placeholder="Enter Salary" required />
-      </div>
+        <input type="text" class="form-control" name="salary" pattern="[0-9]*"
+               minlength="5" maxlength="7"  [(ngModel)]="model.salary" placeholder="Enter Salary" #salary="ngModel" required />
+        <div *ngIf="salary.invalid && (salary.dirty || salary.touched)" class="alert alert-danger">
+          <div *ngIf="salary.errors.required">
+            Salary is required.
+          </div>
+          <div *ngIf="salary.errors.minlength">
+            Salary must be in 5 numbers.
+          </div>
+          <div *ngIf="salary.errors.maxlength">
+            Salary must not be exceeded morethan 7 numbers.
+          </div>
+
+        <div *ngIf="salary.errors?.pattern">Only numebers should be typed
+        </div>
+        </div>
 	</div>
+    </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default" (click)="addEmployee()" [disabled]="empForm.invalid">Add Employee</button>
@@ -45,30 +77,68 @@
 <div *ngIf="edit">
 
   <h2>Update Employee:</h2>
-  <form class="form-horizontal">
+  <form class="form-horizontal" #empForm="ngForm">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name"
-               name="name" [(ngModel)]="model2.name"  placeholder="Enter Your Name" #name="ngModel" required/>
-
+        <input type="text" class="form-control"
+               name="name" minlength="4" maxlength="10" pattern="^[A-Za-z0-9]*[A-Za-z0-9][A-Za-z0-9]\S*$" [(ngModel)]="model2.name"  placeholder="Enter Your Name" #name="ngModel" required/>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.pattern">
+            No Spaces
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="position">Position:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="position" name="position" [(ngModel)]="model2.position" placeholder="Enter your position" required/>
+        <input type="text" class="form-control"
+               name="position" minlength="4" maxlength="10" pattern="^[a-z]*$"
+                  [(ngModel)]="model2.position" placeholder="Enter your position" #position="ngModel" required/>
+        <div *ngIf="position.invalid && (position.dirty || position.touched)" class="alert alert-danger">
+          <div *ngIf="position.errors.required">
+            Position is required.
+          </div>
+          <div *ngIf="position.errors.pattern">
+            Only Alphabets are must be entered
+          </div>
+          <div *ngIf="position.errors.minlength">
+            Position must be at least 4 characters long.
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="salary">Salary:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="salary" name="salary" [(ngModel)]="model2.salary" placeholder="Enter Salary" required/>
+        <input type="text" class="form-control"
+               name="salary" pattern="[0-9]*" minlength="5" maxlength="7"  [(ngModel)]="model2.salary" placeholder="Enter Salary" #salary="ngModel" required/>
+        <div *ngIf="salary.invalid && (salary.dirty || salary.touched)" class="alert alert-danger">
+          <div *ngIf="salary.errors.required">
+            Salary is required.
+          </div>
+          <div *ngIf="salary.errors.minlength">
+            Salary must be in 5 numbers.
+          </div>
+          <div *ngIf="salary.errors.maxlength">
+            Salary must not be exceeded morethan 7 numbers.
+          </div>
+          <div *ngIf="salary.errors?.pattern">
+            Only numebers should be typed
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" (click)="updateEmployee()">update Employee</button>
+        <button type="submit" class="btn btn-default" (click)="updateEmployee()" [disabled]="empForm.invalid">Update Employee</button>
       </div>
     </div>
   </form>
